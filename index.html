@@ -12,28 +12,32 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <!-- Load Proj4js from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.0/proj4.js"></script>
+
+    <!-- Add the following CSS to style the table and set the cursor to default -->
+    <style>
+        /* This rule will apply the default cursor to all elements */
+        * {
+            cursor: default;
+        }
+
+        body {
+            font-size: small;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .btnCenter {
+            margin: 5px;
+        }
+
+        .btnCenter, .btnDelete {
+            font-size: x-small;
+        }
+    </style>
 </head>
-
-<!-- Add the following CSS to style the table -->
-<style>
-    body {
-        font-size: small;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .btnCenter {
-        margin: 5px;
-    }
-
-    .btnCenter,
-    .btnDelete {
-        font-size: x-small;
-    }
-</style>
 
 <body>
     <div class="container-fluid">
