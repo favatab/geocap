@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>GeoCapture</title>
@@ -13,11 +12,16 @@
     <!-- Load Proj4js from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.0/proj4.js"></script>
 
-    <!-- Add the following CSS to style the table and set the cursor to default -->
+    <!-- Add the following CSS to style the table and reset the cursor to default -->
     <style>
-        /* This rule will apply the default cursor to all elements */
+        /* Override cursor style for all elements */
         * {
-            cursor: default;
+            cursor: default !important;
+        }
+        
+        /* Override cursor style specifically for Leaflet interactive elements */
+        .leaflet-interactive {
+            cursor: default !important;
         }
 
         body {
@@ -38,7 +42,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -264,5 +267,4 @@
 
     </script>
 </body>
-
 </html>
