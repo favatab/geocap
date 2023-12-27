@@ -78,17 +78,20 @@
         var map = L.map('map').setView([38.0808, 46.2919], 13);
 
         var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19, // Setting the maximum zoom level for this tile layer
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
 
         var googleStreetMap = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            maxZoom: 22,
             attribution: '&copy; Google Maps'
         });
 
         var googleSatelliteMap = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            maxZoom: 22,
             attribution: '&copy; Google Maps'
         });
 
