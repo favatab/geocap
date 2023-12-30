@@ -207,17 +207,24 @@
         
         // Create the popup HTML with an "Add to List" button
         var popupContent = `
-          <p>Latitude: ${Latitude.toFixed(7)}<br>
-          Longitude: ${Longitude.toFixed(7)}<br>
-          Easting: ${Easting}<br>
-          Northing: ${Northing}<br>
-          UTM Zone: ${UTMZone}</p>
-          <button onclick='addToTable(${Latitude}, ${Longitude}, ${Easting}, ${Northing}, "${UTMZone}")' class="btn btn-primary btn-sm">Add to List</button>`;
+        <p>Latitude: ${Latitude.toFixed(7)}<br>
+        Longitude: ${Longitude.toFixed(7)}<br>
+        Easting: ${Easting}<br>
+        Northing: ${Northing}<br>
+        UTM Zone: ${UTMZone}</p>
+        <button onclick='addToTableWithPrompt(${Latitude}, ${Longitude}, ${Easting}, ${Northing}, "${UTMZone}")' class="btn btn-primary btn-sm">Add to List</button>`;
         
         return popupContent;
       }
 
-      function addToTable(Latitude, Longitude, Easting, Northing, UTMZone) {
+      function addToTableWithPrompt(Latitude, Longitude, Easting, Northing, UTMZone) {
+        var Description = prompt("Please enter a description", "");
+        if (Description != null) {
+          addToTable(Description, Latitude, Longitude, Easting, Northing, UTMZone);
+        }
+      }
+
+      function addToTable(Description, Latitude, Longitude, Easting, Northing, UTMZone) {
         // Use the parameters to add the data to the table directly
         var tableBody = document.querySelector("#locationsTable tbody");
         var newRow = tableBody.insertRow();
@@ -228,7 +235,8 @@
         var deleteCell = newRow.insertCell();
 
         descriptionCell.contentEditable = true;
-        descriptionCell.innerText = "Description"; // Placeholder text
+        // descriptionCell.innerText = "Description"; // Placeholder text
+        descriptionCell.innerText = Description; // Use the provided description
         latCell.innerText = Latitude.toFixed(7);
         lngCell.innerText = Longitude.toFixed(7);
         utmCell.innerText = `${Easting}, ${Northing}, ${UTMZone}`;
