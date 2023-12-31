@@ -289,15 +289,20 @@
 
         // Add Open in Maps Button
         var mapsButton = document.createElement("button");
-        mapsButton.classList.add("btn", "btn-info", "btn-sm", "btnMaps", "ab-btn-googlemaps");
+        mapsButton.classList.add(
+          "btn",
+          "btn-info",
+          "btn-sm",
+          "btnMaps",
+          "ab-btn-googlemaps"
+        );
         mapsButton.innerHTML = '<i class="fab fa-google"></i>'; // Font Awesome map marker icon
-        mapsButton.onclick = function() {
-            // window.open(`https://www.google.com/maps/@${Latitude},${Longitude},17z`);
-            var mapsUrl = `https://www.google.com/maps/search/?api=1&query=${Latitude},${Longitude}`;
-            window.open(mapsUrl, '_blank');
+        mapsButton.onclick = function () {
+          // window.open(`https://www.google.com/maps/@${Latitude},${Longitude},17z`);
+          var mapsUrl = `https://www.google.com/maps/search/?api=1&query=${Latitude},${Longitude}`;
+          window.open(mapsUrl, "_blank");
         };
         deleteCell.appendChild(mapsButton);
-
 
         // Add Delete Button
         var deleteButton = document.createElement("button");
@@ -353,15 +358,8 @@
                 lat,
                 lng
               );
-              marker
-                .bindPopup(
-                  `Latitude: ${Latitude.toFixed(
-                    6
-                  )}<br>Longitude: ${Longitude.toFixed(
-                    6
-                  )}<br>Easting: ${Easting}<br>Northing: ${Northing}<br>UTM Zone: ${UTMZone}`
-                )
-                .openPopup();
+              var popupContent = createPopupContent(Latitude, Longitude);
+              marker.bindPopup(popupContent).openPopup();
             },
             function (error) {
               console.log(error);
@@ -374,11 +372,13 @@
         var locateButton = L.control({ position: "topleft" });
         locateButton.onAdd = function (map) {
           var button = L.DomUtil.create("button");
-          // button.innerHTML = "📍"; 
           button.innerHTML = '<i class="fas fa-crosshairs fa-2x"></i>';
           button.onclick = function () {
             updateLocation();
           };
+          button.addEventListener("click", function (e) {
+            L.DomEvent.stopPropagation(e);
+          });
           return button;
         };
         locateButton.addTo(map);
