@@ -63,6 +63,9 @@
       .ab-btn-googlemaps {
         margin: 5px;
       }
+      .small-text {
+        font-size: 12px; /* or any size you prefer */
+      }
     </style>
   </head>
   <body>
@@ -91,9 +94,15 @@
               </table>
             </div>
           </div>
-          <button id="save-btn" class="btn btn-primary">Save to CSV</button>
-          <button id="copy-btn" class="btn btn-primary">Copy All</button>
-          <button id="save-txt-btn" class="btn btn-primary">Save to TXT</button>
+          <button id="save-btn" class="btn btn-primary btn-sm small-text">
+            Save to CSV
+          </button>
+          <button id="copy-btn" class="btn btn-primary btn-sm small-text">
+            Copy All
+          </button>
+          <button id="save-txt-btn" class="btn btn-primary btn-sm small-text">
+            Save to TXT
+          </button>
         </div>
       </div>
     </div>
@@ -309,13 +318,34 @@
           "ab-btn-googlemaps"
         );
         mapsButton.innerHTML = '<i class="fab fa-google"></i>'; // Font Awesome map marker icon
+        // mapsButton.onclick = function () {
+        //   var mapsUrl = `https://www.google.com/maps/search/?api=1&query=${Latitude},${Longitude}`;
+        //   window.open(mapsUrl, "_blank");
+        // };
         mapsButton.onclick = function () {
-          // window.open(`https://www.google.com/maps/@${Latitude},${Longitude},17z`);
           var mapsUrl = `https://www.google.com/maps/search/?api=1&query=${Latitude},${Longitude}`;
-          window.open(mapsUrl, "_blank");
+
+          // Notify the user
+          if (
+            window.confirm(
+              "Clicking OK will copy the Google Maps link to the clipboard and open the location in Google Maps."
+            )
+          ) {
+            // Copy the Google Maps URL to the clipboard
+            navigator.clipboard.writeText(mapsUrl).then(
+              function () {
+                console.log("Copying to clipboard was successful!");
+              },
+              function (err) {
+                console.error("Could not copy text: ", err);
+              }
+            );
+
+            // Open the Google Maps URL in a new tab
+            window.open(mapsUrl, "_blank");
+          }
         };
         deleteCell.appendChild(mapsButton);
-        
       }
 
       function addDeleteButton(row) {
