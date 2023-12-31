@@ -353,13 +353,14 @@
               // center the map on the current location
               map.setView([lat, lng], map.getZoom());
 
-              // display the latitude, longitude, and UTM coordinates in a popup
-              const [Latitude, Longitude, Easting, Northing, UTMZone] = getUTM(
-                lat,
-                lng
-              );
-              var popupContent = createPopupContent(Latitude, Longitude);
-              marker.bindPopup(popupContent).openPopup();
+              // Move the draggable marker to the current location
+              draggableMarker.setLatLng([lat, lng]);
+
+              // Create the popup content
+              var popupContent = createPopupContent(lat, lng);
+
+              // Bind the popup to the draggable marker and open it
+              draggableMarker.bindPopup(popupContent).openPopup();
             },
             function (error) {
               console.log(error);
